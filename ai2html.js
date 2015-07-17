@@ -1,7 +1,7 @@
 ﻿// ai2html.js
 var scriptVersion     = "0.54";
-// var scriptEnvironment = "nyt";
-var scriptEnvironment = "";
+var scriptEnvironment = "nyt";
+// var scriptEnvironment = "";
 
 // ai2html is a script for Adobe Illustrator that converts your Illustrator document into html and css.
 
@@ -27,7 +27,7 @@ var scriptEnvironment = "";
 // How to install ai2html
 // =====================================
 
-// - Move the ai2html.js file into the Illustrator folder where scripts are located. 
+// - Move the ai2html.js file into the Illustrator folder where scripts are located.
 // - For example, on Mac OS X running Adobe Illustrator CC 2014, the path would be: // Adobe Illustrator CC 2014/Presets/en_US/Scripts/ai2html.jsx
 
 // =====================================
@@ -40,7 +40,7 @@ var scriptEnvironment = "";
 // - Make sure your document is saved.
 // - Use Arial or Georgia unless you have added your own fonts to the fonts array in the script.
 // - Run the script by choosing: File > Scripts > ai2html
-// - Go to the folder containing your Illustrator file. Inside will be a folder called ai2html-output. 
+// - Go to the folder containing your Illustrator file. Inside will be a folder called ai2html-output.
 // - Open the html files in your browser to preview your output.
 
 
@@ -666,13 +666,15 @@ for (setting in ai2htmlBaseSettings) {
 // ================================================
 
 var nyt5Breakpoints = [
-	{ name:"xsmall"    , lowerLimit:  0, upperLimit: 180, artboards:[] },
-	{ name:"small"     , lowerLimit:180, upperLimit: 300, artboards:[] },
-	{ name:"smallplus" , lowerLimit:300, upperLimit: 460, artboards:[] },
-	{ name:"submedium" , lowerLimit:460, upperLimit: 600, artboards:[] },
-	{ name:"medium"    , lowerLimit:600, upperLimit: 720, artboards:[] },
-	{ name:"large"     , lowerLimit:720, upperLimit: 945, artboards:[] },
-	{ name:"xlarge"    , lowerLimit:945, upperLimit:1050, artboards:[] }
+	{ name:"xsmall"    , css: "g-show-xsmall", 		lowerLimit:  0, upperLimit: 180, artboards:[] },
+	{ name:"small"     , css: "g-show-small", 		lowerLimit:180, upperLimit: 300, artboards:[] },
+	{ name:"smallplus" , css: "g-show-smallplus", lowerLimit:300, upperLimit: 460, artboards:[] },
+	{ name:"textwidth" , css: "g-text-width", 		lowerLimit:460, upperLimit: 495, artboards:[] },
+	{ name:"submedium" , css: "g-show-submedium", lowerLimit:495, upperLimit: 600, artboards:[] },
+	{ name:"medium"    , css: "g-show-medium",    lowerLimit:600, upperLimit: 720, artboards:[] },
+	{ name:"large"     , css: "g-show-large",     lowerLimit:720, upperLimit: 945, artboards:[] },
+	{ name:"xlarge"    , css: "g-show-xlarge",    lowerLimit:945, upperLimit:1050, artboards:[] },
+	{ name:"xxlarge"   , css: "g-show-xxlarge",   lowerLimit:1050, upperLimit:1400, artboards:[] }
 ];
 var breakpoints        = {};
 breakpoints.min        = "";
@@ -1110,7 +1112,7 @@ if (doc.documentColorSpace!="DocumentColorSpace.RGB") {
 
 			html[1] += "\r\t<!-- Artboard: " + artboardName + " -->\r"
 
-			var showClass = "";
+			var showClass = "g-resizer-v2";
 
 			for (var bpNumber = 0; bpNumber < nyt5Breakpoints.length; bpNumber++) {
 				var nyt5Breakpoint = nyt5Breakpoints[bpNumber];
@@ -1118,7 +1120,7 @@ if (doc.documentColorSpace!="DocumentColorSpace.RGB") {
 					var bpArtboard = nyt5Breakpoint.artboards[bpArtboardNumber];
 					if (abNumber==bpArtboard) {
 						showClass += (showClass.length>0) ? " ":"";
-						showClass += "g-show-" + nyt5Breakpoint.name;
+						showClass += nyt5Breakpoint.css;
 					}
 				}
 			}
