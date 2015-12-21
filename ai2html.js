@@ -822,25 +822,25 @@ var fonts = [{
 }, {
     "aifont": "Forza-Bold",
     "family": "'Forza A', 'Forza B', 'Helvetica Neue', Arial, sans-serif",
-    "weight": "800",
+    "weight": "600",
     "style": "",
     "nyt5": ""
 }, {
     "aifont": "Forza-BoldItalic",
     "family": "'Forza A', 'Forza B', 'Helvetica Neue', Arial, sans-serif",
-    "weight": "800",
+    "weight": "600",
     "style": "italic",
     "nyt5": ""
 }, {
     "aifont": "Forza-Medium",
     "family": "'Forza A', 'Forza B', 'Helvetica Neue', Arial, sans-serif",
-    "weight": "600",
+    "weight": "500",
     "style": "",
     "nyt5": ""
 }, {
     "aifont": "Forza-MediumItalic",
     "family": "'Forza A', 'Forza B', 'Helvetica Neue', Arial, sans-serif",
-    "weight": "600",
+    "weight": "500",
     "style": "italic",
     "nyt5": ""
 }, {
@@ -2133,7 +2133,7 @@ if (doc.documentColorSpace!="DocumentColorSpace.RGB") {
 				};
 			};
 
-			var imageDestinationFolder = docPath + docSettings.html_output_path + docSettings.image_output_path;
+			var imageDestinationFolder = docPath +  docSettings.image_output_path;
 			checkForOutputFolder(imageDestinationFolder, "image_output_path");
 			var imageDestination = imageDestinationFolder + docArtboardName;
 			// alert ("imageDestination\n" +
