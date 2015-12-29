@@ -475,7 +475,7 @@ if (scriptEnvironment=="prod") {
 	        create_promo_image: {defaultValue: "yes", includeInSettingsBlock: true, includeInConfigFile: false, useQuoteMarksInConfigFile: false, inputType: "text", possibleValues: "", notes: ""},
 	        image_format: {defaultValue: ["png"], includeInSettingsBlock: true, includeInConfigFile: false, useQuoteMarksInConfigFile: false, inputType: "array", possibleValues: "jpg, png, png24", notes: "Images will be generated in mulitple formats if multiple formats are listed, separated by commas. The first format will be used in the html. Sometimes this is useful to compare which format will have a smaller file size."},
 	        write_image_files: {defaultValue: "yes", includeInSettingsBlock: true, includeInConfigFile: false, useQuoteMarksInConfigFile: false, inputType: "yesNo", possibleValues: "", notes: "Set this to “no” to skip writing the image files. Generally only use this after you have run the script once with this setting set to “yes.”"},
-	        responsiveness: {defaultValue: "fixed", includeInSettingsBlock: true, includeInConfigFile: false, useQuoteMarksInConfigFile: false, inputType: "text", possibleValues: "fixed, dynamic", notes: "Dynamic responsiveness means ai graphics will scale to fill the container they are placed in."},
+	        responsiveness: {defaultValue: "dynamic", includeInSettingsBlock: true, includeInConfigFile: false, useQuoteMarksInConfigFile: false, inputType: "text", possibleValues: "fixed, dynamic", notes: "Dynamic responsiveness means ai graphics will scale to fill the container they are placed in."},
 	        max_width: {defaultValue: "", includeInSettingsBlock: true, includeInConfigFile: false, useQuoteMarksInConfigFile: false, inputType: "integer", possibleValues: "", notes: "Blank or any positive number in pixels, but do not write “px” - blank means artboards will set max size, instead it is written to the config file so that the max width can be applied to the template’s container."},
 	        output: {defaultValue: "one-file", includeInSettingsBlock: true, includeInConfigFile: false, useQuoteMarksInConfigFile: false, inputType: "text", possibleValues: "one-file, multiple-files", notes: "One html file containing all the artboards or a separate html file for each artboard."},
 	        project_name: {defaultValue: "", includeInSettingsBlock: false, includeInConfigFile: false, useQuoteMarksInConfigFile: false, inputType: "text", possibleValues: "", notes: "Use this to set a custom project name. The project name is being used in output filenames, class names, etc."},
@@ -526,7 +526,7 @@ if (scriptEnvironment=="prod") {
 	        create_promo_image: {defaultValue: "no", includeInSettingsBlock: false, includeInConfigFile: false, useQuoteMarksInConfigFile: false, inputType: "text", possibleValues: "", notes: ""},
 	        image_format: {defaultValue: ["png"], includeInSettingsBlock: true, includeInConfigFile: false, useQuoteMarksInConfigFile: false, inputType: "array", possibleValues: "jpg, png, png24", notes: "Images will be generated in mulitple formats if multiple formats are listed, separated by commas. The first format will be used in the html. Sometimes this is useful to compare which format will have a smaller file size."},
 	        write_image_files: {defaultValue: "yes", includeInSettingsBlock: false, includeInConfigFile: false, useQuoteMarksInConfigFile: false, inputType: "yesNo", possibleValues: "", notes: "Set this to “no” to skip writing the image files. Generally only use this after you have run the script once with this setting set to “yes.”"},
-	        responsiveness: {defaultValue: "fixed", includeInSettingsBlock: true, includeInConfigFile: false, useQuoteMarksInConfigFile: false, inputType: "text", possibleValues: "fixed, dynamic", notes: "Dynamic responsiveness means ai graphics will scale to fill the container they are placed in."},
+	        responsiveness: {defaultValue: "dynamic", includeInSettingsBlock: true, includeInConfigFile: false, useQuoteMarksInConfigFile: false, inputType: "text", possibleValues: "fixed, dynamic", notes: "Dynamic responsiveness means ai graphics will scale to fill the container they are placed in."},
 	        max_width: {defaultValue: "", includeInSettingsBlock: false, includeInConfigFile: false, useQuoteMarksInConfigFile: false, inputType: "integer", possibleValues: "", notes: "Blank or any positive number in pixels, but do not write “px” - blank means artboards will set max size, the max width is not included in the html stub, instead it is written to the config file so that the max width can be applied to the template’s container."},
 	        output: {defaultValue: "one-file", includeInSettingsBlock: true, includeInConfigFile: false, useQuoteMarksInConfigFile: false, inputType: "text", possibleValues: "one-file, multiple-files", notes: "One html file containing all the artboards or a separate html file for each artboard."},
 	        project_name: {defaultValue: "", includeInSettingsBlock: false, includeInConfigFile: false, useQuoteMarksInConfigFile: false, inputType: "text", possibleValues: "", notes: "Use this to set a custom project name. The project name is being used in output filenames, class names, etc."},
@@ -1994,7 +1994,7 @@ if (doc.documentColorSpace!="DocumentColorSpace.RGB") {
 				headerText             += "\t\t\tmargin: 0px;\r";
 				headerText             += "\t\t}\r";
 				if (docSettings.max_width!="") {
-					headerText             += "\t\t#" + nameSpace + docArtboardName + " {\r";
+					headerText             += "\t\t."+nameSpace+"artboard {\r";
 					headerText             += "\t\t\tmax-width:" + docSettings.max_width + "px;\r";
 					headerText             += "\t\t}\r";
 				};
@@ -2080,7 +2080,7 @@ if (doc.documentColorSpace!="DocumentColorSpace.RGB") {
 		headerText                   += "\t\t\tmargin: 0px;\r";
 		headerText                   += "\t\t}\r";
 		if (docSettings.max_width!="") {
-			headerText               += "\t\t#" + nameSpace + makeKeyword(docSettings.project_name) + " {\r";
+			headerText               += "\t\t."+nameSpace+"artboard {\r";
 			headerText               += "\t\t\tmax-width:" + docSettings.max_width + "px;\r";
 			headerText               += "\t\t}\r";
 		};
