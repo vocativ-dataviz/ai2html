@@ -604,18 +604,6 @@ var fonts = [
 	{"aifont":"Forza-LightItalic","family":"'Forza A', 'Forza B', 'Helvetica Neue', Arial, sans-serif","weight":"200","style":"italic"},
 	{"aifont":"Forza-Thin","family":"'Forza A', 'Forza B', 'Helvetica Neue', Arial, sans-serif","weight":"200","style":""},
 	{"aifont":"Forza-ThinItalic","family":"'Forza A', 'Forza B', 'Helvetica Neue', Arial, sans-serif","weight":"200","style":"italic"},
-	{"aifont":"Whitney-Black-Bas","family":"'Whitney SSm A', 'Whitney SSm B', 'Helvetica Neue', Helvetica, Arial, sans-serif;","weight":"800","style":""},
-	{"aifont":"Whitney-BlackItal-Bas","family":"'Whitney SSm A', 'Whitney SSm B', 'Helvetica Neue', Helvetica, Arial, sans-serif;","weight":"800","style":"italic"},
-	{"aifont":"Whitney-Bold-Bas","family":"'Whitney SSm A', 'Whitney SSm B', 'Helvetica Neue', Helvetica, Arial, sans-serif;","weight":"800","style":""},
-	{"aifont":"Whitney-BoldItal-Bas","family":"'Whitney SSm A', 'Whitney SSm B', 'Helvetica Neue', Helvetica, Arial, sans-serif;","weight":"800","style":"italic"},
-	{"aifont":"Whitney-Semibold-Bas","family":"'Whitney SSm A', 'Whitney SSm B', 'Helvetica Neue', Helvetica, Arial, sans-serif;","weight":"600","style":""},
-	{"aifont":"Whitney-SemiboldItal-Bas","family":"'Whitney SSm A', 'Whitney SSm B', 'Helvetica Neue', Helvetica, Arial, sans-serif;","weight":"600","style":"italic"},
-	{"aifont":"Whitney-Medium-Bas","family":"'Whitney SSm A', 'Whitney SSm B', 'Helvetica Neue', Helvetica, Arial, sans-serif;","weight":"500","style":""},
-	{"aifont":"Whitney-MediumItal-Bas","family":"'Whitney SSm A', 'Whitney SSm B', 'Helvetica Neue', Helvetica, Arial, sans-serif;","weight":"500","style":"italic"},
-	{"aifont":"Whitney-Book-Bas","family":"'Whitney SSm A', 'Whitney SSm B', 'Helvetica Neue', Helvetica, Arial, sans-serif;","weight":"400","style":""},
-	{"aifont":"Whitney-BookItal-Bas","family":"'Whitney SSm A', 'Whitney SSm B', 'Helvetica Neue', Helvetica, Arial, sans-serif;","weight":"400","style":"italic"},
-	{"aifont":"Whitney-Thin-Bas","family":"'Whitney SSm A', 'Whitney SSm B', 'Helvetica Neue', Helvetica, Arial, sans-serif;","weight":"200","style":""},
-	{"aifont":"Whitney-ThinItal-Bas","family":"'Whitney SSm A', 'Whitney SSm B', 'Helvetica Neue', Helvetica, Arial, sans-serif;","weight":"200","style":"italic"},
 	{"aifont":"Whitney-Black","family":"'Whitney SSm A', 'Whitney SSm B', 'Helvetica Neue', Helvetica, Arial, sans-serif;","weight":"800","style":""},
 	{"aifont":"Whitney-BlackItalic","family":"'Whitney SSm A', 'Whitney SSm B', 'Helvetica Neue', Helvetica, Arial, sans-serif;","weight":"800","style":"italic"},
 	{"aifont":"Whitney-Bold","family":"'Whitney SSm A', 'Whitney SSm B', 'Helvetica Neue', Helvetica, Arial, sans-serif;","weight":"800","style":""},
@@ -628,15 +616,15 @@ var fonts = [
 	{"aifont":"Whitney-BookItalic","family":"'Whitney SSm A', 'Whitney SSm B', 'Helvetica Neue', Helvetica, Arial, sans-serif;","weight":"400","style":"italic"},
 	{"aifont":"Whitney-Thin","family":"'Whitney SSm A', 'Whitney SSm B', 'Helvetica Neue', Helvetica, Arial, sans-serif;","weight":"200","style":""},
 	{"aifont":"Whitney-ThinItalic","family":"'Whitney SSm A', 'Whitney SSm B', 'Helvetica Neue', Helvetica, Arial, sans-serif;","weight":"200","style":"italic"},
-	{"aifont":"DSType - Solido-Heavy","family":"'Solido-Bold', 'Helvetica-Neue', 'Helvetica', Arial, sans-serif","weight":"800","style":""},
-	{"aifont":"DSType - Solido-Black","family":"'Solido-Bold', 'Helvetica-Neue', 'Helvetica', Arial, sans-serif","weight":"800","style":""},
-	{"aifont":"DSType - Solido-ExtraBold","family":"'Solido-Bold', 'Helvetica-Neue', 'Helvetica', Arial, sans-serif","weight":"600","style":""},
-	{"aifont":"DSType - Solido-Bold","family":"'Solido-Bold', 'Helvetica-Neue', 'Helvetica', Arial, sans-serif","weight":"600","style":""},
-	{"aifont":"DSType - Solido-Medium","family":"'Solido-Medium', 'Helvetica-Neue', 'Helvetica', Arial, sans-serif","weight":"500","style":""},
-	{"aifont":"DSType - Solido-Book","family":"'Solido-Medium', 'Helvetica-Neue', 'Helvetica', Arial, sans-serif","weight":"500","style":""},
-	{"aifont":"DSType - Solido-Light","family":"'Solido-Light', 'Helvetica-Neue', 'Helvetica', Arial, sans-serif","weight":"400","style":""},
-	{"aifont":"DSType - Solido-UltraLight","family":"'Solido-Light', 'Helvetica-Neue', 'Helvetica', Arial, sans-serif","weight":"200","style":""},
-	{"aifont":"DSType - Solido-Hairline","family":"'Solido-Light', 'Helvetica-Neue', 'Helvetica', Arial, sans-serif","weight":"200","style":""}
+	{"aifont":"Solido-Heavy","family":"'Solido-Bold', 'Helvetica-Neue', 'Helvetica', Arial, sans-serif","weight":"800","style":""},
+	{"aifont":"Solido-Black","family":"'Solido-Bold', 'Helvetica-Neue', 'Helvetica', Arial, sans-serif","weight":"800","style":""},
+	{"aifont":"Solido-ExtraBold","family":"'Solido-Bold', 'Helvetica-Neue', 'Helvetica', Arial, sans-serif","weight":"600","style":""},
+	{"aifont":"Solido-Bold","family":"'Solido-Bold', 'Helvetica-Neue', 'Helvetica', Arial, sans-serif","weight":"600","style":""},
+	{"aifont":"Solido-Medium","family":"'Solido-Medium', 'Helvetica-Neue', 'Helvetica', Arial, sans-serif","weight":"500","style":""},
+	{"aifont":"Solido-Book","family":"'Solido-Medium', 'Helvetica-Neue', 'Helvetica', Arial, sans-serif","weight":"500","style":""},
+	{"aifont":"Solido-Light","family":"'Solido-Light', 'Helvetica-Neue', 'Helvetica', Arial, sans-serif","weight":"400","style":""},
+	{"aifont":"Solido-UltraLight","family":"'Solido-Light', 'Helvetica-Neue', 'Helvetica', Arial, sans-serif","weight":"200","style":""},
+	{"aifont":"Solido-Hairline","family":"'Solido-Light', 'Helvetica-Neue', 'Helvetica', Arial, sans-serif","weight":"200","style":""}
 ];
 
 var caps = [
@@ -2005,7 +1993,7 @@ if (doc.documentColorSpace!="DocumentColorSpace.RGB") {
 				};
 				headerText             += "\t</style>\r";
 				headerText             += "\r";
-				var footerText          = "\t<!-- End ai2html" + " - " + dateTimeStamp + " -->\r</div>\r";
+				var footerText         = "\t<!-- End ai2html" + " - " + dateTimeStamp + " -->\r</div>\r";
 
 				textForFile += headerText;
 				if (previewProjectType=="ai2html") { textForFile += responsiveCss; };
