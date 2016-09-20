@@ -1817,7 +1817,7 @@ var fonts = [{
     {"aifont":"Whitney-ThinItalic","family":"'Whitney SSm A', 'Whitney SSm B', 'Helvetica Neue', Helvetica, Arial, sans-serif;","weight":"200","style":"italic"},
     {"aifont":"Solido-Heavy","family":"'Solido-Bold', 'Helvetica-Neue', 'Helvetica', Arial, sans-serif","weight":"800","style":""},
     {"aifont":"Solido-Black","family":"'Solido-Bold', 'Helvetica-Neue', 'Helvetica', Arial, sans-serif","weight":"800","style":""},
-    {"aifont":"Solido-ExtraBold","family":"'Solido-Bold', 'Helvetica-Neue', 'Helvetica', Arial, sans-serif","weight":"600","style":""},
+    {"aifont":"Solido-ExtraBold","family":"'Solido-ExtraBold', 'Helvetica-Neue', 'Helvetica', Arial, sans-serif","weight":"600","style":""},
     {"aifont":"Solido-Bold","family":"'Solido-Bold', 'Helvetica-Neue', 'Helvetica', Arial, sans-serif","weight":"600","style":""},
     {"aifont":"Solido-Medium","family":"'Solido-Medium', 'Helvetica-Neue', 'Helvetica', Arial, sans-serif","weight":"500","style":""},
     {"aifont":"Solido-Book","family":"'Solido-Light', 'Helvetica-Neue', 'Helvetica', Arial, sans-serif","weight":"500","style":""},
