@@ -1,5 +1,4 @@
-﻿// ai2html.js
-var scriptVersion = "0.61";
+var scriptVersion     = "0.61";
 // var scriptEnvironment = "nyt";
 var scriptEnvironment = "";
 
@@ -256,109 +255,111 @@ var straightenCurlyQuotesInsideAngleBrackets = function(text) {
         return tag.replace(/[“”]/g, '"').replace(/[‘’]/g, "'");
     });
 };
-var exportImageFiles = function(dest, width, height, formats, initialScaling, doubleres) {
-    // alert(formats);
-    // width and height are the artboard width and height and only used to determine whether or not to double res
-    // initialScaling is the proportion to scale the base image before considering whether to double res. Usually just 1.
-    // Exports current document to dest as a PNG8 file with specified
-    // options, dest contains the full path including the file name
-    // doubleres is "yes" or "no" whether you want to allow images to be double res
 
-    if (doubleres == "yes") {
-        // if image is too big to use double-res, then just output single-res.
-        var pngImageScaling = 200 * initialScaling;
-        var jpgImageScaling = 200 * initialScaling;
-        if ((width * height) < (3 * 1024 * 1024 / 4)) {
-            // <3
-            // feedback.push("The jpg and png images are double resolution.");
-        } else if ((width * height) < (3 * 1024 * 1024)) {
-            // .75-3
-            pngImageScaling = 100;
-            // feedback.push("The png image is single resolution.");
-            // feedback.push("The jpg image is double resolution.");
-        } else if ((width * height) < (32 * 1024 * 1024 / 4)) {
-            // 3-8
-            pngImageScaling = 100;
-            // warnings.push("The png image is single resolution, but is too large to display on first-generation iPhones.");
-            // feedback.push("The jpg image is double resolution.");
-        } else if ((width * height) < (32 * 1024 * 1024)) {
-            // 8-32
-            pngImageScaling = 100;
-            jpgImageScaling = 100;
-            // warnings.push("The png image is single resolution, but is too large to display on first-generation iPhones.");
-            // feedback.push("The jpg image is single resolution.");
-        } else {
-            // 32+
-            pngImageScaling = 100;
-            jpgImageScaling = 100;
-            // warnings.push("The jpg and png images are single resolution, but are too large to display on first-generation iPhones.");
-        };
-    } else {
-        var pngImageScaling = 100 * initialScaling;
-        var jpgImageScaling = 100 * initialScaling;
-    };
-    // alert("scaling\npngImageScaling = " + pngImageScaling + "\njpgImageScaling = " + jpgImageScaling);
+var exportImageFiles = function(dest,width,height,formats,initialScaling,doubleres) {
+	// alert(formats);
+	// width and height are the artboard width and height and only used to determine whether or not to double res
+	// initialScaling is the proportion to scale the base image before considering whether to double res. Usually just 1.
+	// Exports current document to dest as a PNG8 file with specified
+	// options, dest contains the full path including the file name
+	// doubleres is "yes" or "no" whether you want to allow images to be double res
+	// if you want to force ai2html to use doubleres, use "always"
+	
+	if (doubleres=="yes" || doubleres=="always") {
+		// if image is too big to use double-res, then just output single-res.
+		var pngImageScaling = 200 * initialScaling;
+		var jpgImageScaling = 200 * initialScaling;
+		if (doubleres == 'always' || ((width*height) < (3*1024*1024/4) || (width >= 945))) {
+			// <3
+			// feedback.push("The jpg and png images are double resolution.");
+		} else if ( (width*height) < (3*1024*1024) ) {
+			// .75-3
+			pngImageScaling = 100;
+			// feedback.push("The png image is single resolution.");
+			// feedback.push("The jpg image is double resolution.");
+		} else if ( (width*height) < (32*1024*1024/4) ) {
+			// 3-8
+			pngImageScaling = 100;
+			// warnings.push("The png image is single resolution, but is too large to display on first-generation iPhones.");
+			// feedback.push("The jpg image is double resolution.");
+		} else if ( (width*height) < (32*1024*1024) ) {
+			// 8-32
+			pngImageScaling = 100;
+			jpgImageScaling = 100;
+			// warnings.push("The png image is single resolution, but is too large to display on first-generation iPhones.");
+			// feedback.push("The jpg image is single resolution.");
+		} else {
+			// 32+
+			pngImageScaling = 100;
+			jpgImageScaling = 100;
+			// warnings.push("The jpg and png images are single resolution, but are too large to display on first-generation iPhones.");
+		};
+	} else {
+		var pngImageScaling = 100 * initialScaling;
+		var jpgImageScaling = 100 * initialScaling;
+	};
+	// alert("scaling\npngImageScaling = " + pngImageScaling + "\njpgImageScaling = " + jpgImageScaling);
 
-    for (var formatNumber = 0; formatNumber < formats.length; formatNumber++) {
-        var format = formats[formatNumber];
-        if (format == "png") {
-            var pngExportOptions = new ExportOptionsPNG8();
-            var pngType = ExportType.PNG8;
-            var pngFileSpec = new File(dest);
-            pngExportOptions.colorCount = docSettings.png_number_of_colors;
-            pngExportOptions.transparency = (docSettings.png_transparent === "no") ? false : true;
-            pngExportOptions.artBoardClipping = true;
-            pngExportOptions.antiAliasing = false;
-            pngExportOptions.horizontalScale = pngImageScaling;
-            pngExportOptions.verticalScale = pngImageScaling;
-            app.activeDocument.exportFile(pngFileSpec, pngType, pngExportOptions);
-            // feedback.push("pngExportOptions.png_number_of_colors = " + pngExportOptions.colorCount);
-            // feedback.push("pngExportOptions.transparency = " + pngExportOptions.transparency);
-        } else if (format == "png24") {
-            var pngExportOptions = new ExportOptionsPNG24();
-            var pngType = ExportType.PNG24;
-            var pngFileSpec = new File(dest);
-            pngExportOptions.transparency = (docSettings.png_transparent === "no") ? false : true;
-            pngExportOptions.artBoardClipping = true;
-            pngExportOptions.antiAliasing = false;
-            pngExportOptions.horizontalScale = pngImageScaling;
-            pngExportOptions.verticalScale = pngImageScaling;
-            app.activeDocument.exportFile(pngFileSpec, pngType, pngExportOptions);
-        } else if (format == "svg") {
-            var svgExportOptions = new ExportOptionsSVG();
-            var svgType = ExportType.SVG;
-            // alert("This will be the svg dest: " + dest);
-            var svgFileSpec = new File(dest);
-            svgExportOptions.embedAllFonts = false;
-            svgExportOptions.fontSubsetting = SVGFontSubsetting.None;
-            svgExportOptions.compressed = false;
-            svgExportOptions.documentEncoding = SVGDocumentEncoding.UTF8;
-            svgExportOptions.embedRasterImages = (docSettings.svg_embed_images === "yes") ? true : false;
-            // svgExportOptions.horizontalScale       = initialScaling;
-            // svgExportOptions.verticalScale         = initialScaling;
-            svgExportOptions.saveMultipleArtboards = false;
-            svgExportOptions.DTD = SVGDTDVersion.SVG1_1; // SVG1_0 SVGTINY1_1 <=default SVG1_1 SVGTINY1_1PLUS SVGBASIC1_1 SVGTINY1_2
-            svgExportOptions.cssProperties = SVGCSSPropertyLocation.STYLEATTRIBUTES; // ENTITIES STYLEATTRIBUTES <=default PRESENTATIONATTRIBUTES STYLEELEMENTS
-            app.activeDocument.exportFile(svgFileSpec, svgType, svgExportOptions);
+	for (var formatNumber = 0; formatNumber < formats.length; formatNumber++) {
+		var format = formats[formatNumber];
+		if (format=="png") {
+			var pngExportOptions = new ExportOptionsPNG8();
+			var pngType = ExportType.PNG8;
+			var pngFileSpec = new File(dest);
+			pngExportOptions.colorCount       = docSettings.png_number_of_colors;
+			pngExportOptions.transparency     = (docSettings.png_transparent==="no") ? false : true;
+			pngExportOptions.artBoardClipping = true;
+			pngExportOptions.antiAliasing     = false;
+			pngExportOptions.horizontalScale  = pngImageScaling;
+			pngExportOptions.verticalScale    = pngImageScaling;
+			app.activeDocument.exportFile( pngFileSpec, pngType, pngExportOptions );
+			// feedback.push("pngExportOptions.png_number_of_colors = " + pngExportOptions.colorCount);
+			// feedback.push("pngExportOptions.transparency = " + pngExportOptions.transparency);
+		} else if (format=="png24") {
+			var pngExportOptions = new ExportOptionsPNG24();
+			var pngType = ExportType.PNG24;
+			var pngFileSpec = new File(dest);
+			pngExportOptions.transparency     = (docSettings.png_transparent==="no") ? false : true;
+			pngExportOptions.artBoardClipping = true;
+			pngExportOptions.antiAliasing     = false;
+			pngExportOptions.horizontalScale  = pngImageScaling;
+			pngExportOptions.verticalScale    = pngImageScaling;
+			app.activeDocument.exportFile( pngFileSpec, pngType, pngExportOptions );
+		} else if (format=="svg") {
+			var svgExportOptions = new ExportOptionsSVG();
+			var svgType = ExportType.SVG;
+			// alert("This will be the svg dest: " + dest);
+			var svgFileSpec = new File(dest);
+			svgExportOptions.embedAllFonts         = false;
+			svgExportOptions.fontSubsetting        = SVGFontSubsetting.None;
+			svgExportOptions.compressed            = false;
+			svgExportOptions.documentEncoding      = SVGDocumentEncoding.UTF8;
+			svgExportOptions.embedRasterImages     = (docSettings.svg_embed_images==="yes") ? true : false;
+			// svgExportOptions.horizontalScale       = initialScaling;
+			// svgExportOptions.verticalScale         = initialScaling;
+			svgExportOptions.saveMultipleArtboards = false;
+			svgExportOptions.DTD                   = SVGDTDVersion.SVG1_1; // SVG1_0 SVGTINY1_1 <=default SVG1_1 SVGTINY1_1PLUS SVGBASIC1_1 SVGTINY1_2
+			svgExportOptions.cssProperties         = SVGCSSPropertyLocation.STYLEATTRIBUTES; // ENTITIES STYLEATTRIBUTES <=default PRESENTATIONATTRIBUTES STYLEELEMENTS
+			app.activeDocument.exportFile( svgFileSpec, svgType, svgExportOptions );
 
-        } else if (format == "jpg") {
-            if (jpgImageScaling > maxJpgImageScaling) {
-                jpgImageScaling = maxJpgImageScaling;
-                var promoImageFileName = dest.split("/").slice(-1)[0];
-                feedback.push(promoImageFileName + ".jpg was output at a lower scaling than desired because of a limit on jpg exports in Illustrator. If the file needs to be larger, change the image format to png which does not appear to have limits.")
-            };
-            var jpgExportOptions = new ExportOptionsJPEG();
-            var jpgType = ExportType.JPEG;
-            var jpgFileSpec = new File(dest);
-            jpgExportOptions.artBoardClipping = true;
-            jpgExportOptions.antiAliasing = false;
-            jpgExportOptions.qualitySetting = docSettings.jpg_quality;
-            jpgExportOptions.horizontalScale = jpgImageScaling;
-            jpgExportOptions.verticalScale = jpgImageScaling;
-            app.activeDocument.exportFile(jpgFileSpec, jpgType, jpgExportOptions);
-            // feedback.push("jpgExportOptions.qualitySetting = " + jpgExportOptions.qualitySetting);
-        };
-    };
+		} else if (format=="jpg") {
+			if (jpgImageScaling > maxJpgImageScaling) {
+				jpgImageScaling = maxJpgImageScaling;
+				var promoImageFileName = dest.split("/").slice(-1)[0];
+				feedback.push(promoImageFileName + ".jpg was output at a lower scaling than desired because of a limit on jpg exports in Illustrator. If the file needs to be larger, change the image format to png which does not appear to have limits.")
+			};
+			var jpgExportOptions = new ExportOptionsJPEG();
+			var jpgType = ExportType.JPEG;
+			var jpgFileSpec = new File(dest);
+			jpgExportOptions.artBoardClipping = true;
+			jpgExportOptions.antiAliasing     = false;
+			jpgExportOptions.qualitySetting   = docSettings.jpg_quality;
+			jpgExportOptions.horizontalScale  = jpgImageScaling;
+			jpgExportOptions.verticalScale    = jpgImageScaling;
+			app.activeDocument.exportFile( jpgFileSpec, jpgType, jpgExportOptions );
+			// feedback.push("jpgExportOptions.qualitySetting = " + jpgExportOptions.qualitySetting);
+		};
+	};
 };
 var isEmpty = function(str) {
     return (!str || 0 === str.length);
@@ -1510,287 +1511,15 @@ if (scriptEnvironment == "nyt") {
 // https://docs.google.com/spreadsheets/d/13ESQ9ktfkdzFq78FkWLGaZr2s3lNbv2cN25F2pYf5XM/edit?usp=sharing
 // Make a copy of the spreadsheet for yourself.
 // Modify the settings to taste.
-var fonts = [{
-    "aifont": "ArialMT",
-    "family": "arial,helvetica,sans-serif",
-    "weight": "",
-    "style": ""
-}, {
-    "aifont": "Arial-BoldMT",
-    "family": "arial,helvetica,sans-serif",
-    "weight": "bold",
-    "style": ""
-}, {
-    "aifont": "Arial-ItalicMT",
-    "family": "arial,helvetica,sans-serif",
-    "weight": "",
-    "style": "italic"
-}, {
-    "aifont": "Arial-BoldItalicMT",
-    "family": "arial,helvetica,sans-serif",
-    "weight": "bold",
-    "style": "italic"
-}, {
-    "aifont": "Georgia",
-    "family": "georgia,'times new roman',times,serif",
-    "weight": "",
-    "style": ""
-}, {
-    "aifont": "Georgia-Bold",
-    "family": "georgia,'times new roman',times,serif",
-    "weight": "bold",
-    "style": ""
-}, {
-    "aifont": "Georgia-Italic",
-    "family": "georgia,'times new roman',times,serif",
-    "weight": "",
-    "style": "italic"
-}, {
-    "aifont": "Georgia-BoldItalic",
-    "family": "georgia,'times new roman',times,serif",
-    "weight": "bold",
-    "style": "italic"
-}, {
-    "aifont": "NYTFranklin-Light",
-    "family": "nyt-franklin,arial,helvetica,sans-serif",
-    "weight": "300",
-    "style": ""
-}, {
-    "aifont": "NYTFranklin-Medium",
-    "family": "nyt-franklin,arial,helvetica,sans-serif",
-    "weight": "500",
-    "style": ""
-}, {
-    "aifont": "NYTFranklin-SemiBold",
-    "family": "nyt-franklin,arial,helvetica,sans-serif",
-    "weight": "600",
-    "style": ""
-}, {
-    "aifont": "NYTFranklinSemiBold-Regular",
-    "family": "nyt-franklin,arial,helvetica,sans-serif",
-    "weight": "600",
-    "style": ""
-}, {
-    "aifont": "NYTFranklin-Bold",
-    "family": "nyt-franklin,arial,helvetica,sans-serif",
-    "weight": "700",
-    "style": ""
-}, {
-    "aifont": "NYTFranklin-LightItalic",
-    "family": "nyt-franklin,arial,helvetica,sans-serif",
-    "weight": "300",
-    "style": "italic"
-}, {
-    "aifont": "NYTFranklin-MediumItalic",
-    "family": "nyt-franklin,arial,helvetica,sans-serif",
-    "weight": "500",
-    "style": "italic"
-}, {
-    "aifont": "NYTFranklin-BoldItalic",
-    "family": "nyt-franklin,arial,helvetica,sans-serif",
-    "weight": "700",
-    "style": "italic"
-}, {
-    "aifont": "NYTFranklin-Headline",
-    "family": "nyt-franklin,arial,helvetica,sans-serif",
-    "weight": "bold",
-    "style": ""
-}, {
-    "aifont": "NYTFranklin-HeadlineItalic",
-    "family": "nyt-franklin,arial,helvetica,sans-serif",
-    "weight": "bold",
-    "style": "italic"
-}, {
-    "aifont": "NYTCheltenham-ExtraLight",
-    "family": "nyt-cheltenham,georgia,'times new roman',times,serif",
-    "weight": "200",
-    "style": ""
-}, {
-    "aifont": "NYTCheltenham-Light",
-    "family": "nyt-cheltenham,georgia,'times new roman',times,serif",
-    "weight": "300",
-    "style": ""
-}, {
-    "aifont": "NYTCheltenham-Book",
-    "family": "nyt-cheltenham,georgia,'times new roman',times,serif",
-    "weight": "400",
-    "style": ""
-}, {
-    "aifont": "NYTCheltenham-Wide",
-    "family": "nyt-cheltenham,georgia,'times new roman',times,serif",
-    "weight": "",
-    "style": ""
-}, {
-    "aifont": "NYTCheltenham-Medium",
-    "family": "nyt-cheltenham,georgia,'times new roman',times,serif",
-    "weight": "500",
-    "style": ""
-}, {
-    "aifont": "NYTCheltenham-Bold",
-    "family": "nyt-cheltenham,georgia,'times new roman',times,serif",
-    "weight": "700",
-    "style": ""
-}, {
-    "aifont": "NYTCheltenham-BoldCond",
-    "family": "nyt-cheltenham,georgia,'times new roman',times,serif",
-    "weight": "bold",
-    "style": ""
-}, {
-    "aifont": "NYTCheltenham-BoldExtraCond",
-    "family": "nyt-cheltenham,georgia,'times new roman',times,serif",
-    "weight": "bold",
-    "style": ""
-}, {
-    "aifont": "NYTCheltenham-ExtraBold",
-    "family": "nyt-cheltenham,georgia,'times new roman',times,serif",
-    "weight": "bold",
-    "style": ""
-}, {
-    "aifont": "NYTCheltenham-ExtraLightIt",
-    "family": "nyt-cheltenham,georgia,'times new roman',times,serif",
-    "weight": "",
-    "style": "italic"
-}, {
-    "aifont": "NYTCheltenham-ExtraLightItal",
-    "family": "nyt-cheltenham,georgia,'times new roman',times,serif",
-    "weight": "",
-    "style": "italic"
-}, {
-    "aifont": "NYTCheltenham-LightItalic",
-    "family": "nyt-cheltenham,georgia,'times new roman',times,serif",
-    "weight": "",
-    "style": "italic"
-}, {
-    "aifont": "NYTCheltenham-BookItalic",
-    "family": "nyt-cheltenham,georgia,'times new roman',times,serif",
-    "weight": "",
-    "style": "italic"
-}, {
-    "aifont": "NYTCheltenham-WideItalic",
-    "family": "nyt-cheltenham,georgia,'times new roman',times,serif",
-    "weight": "",
-    "style": "italic"
-}, {
-    "aifont": "NYTCheltenham-MediumItalic",
-    "family": "nyt-cheltenham,georgia,'times new roman',times,serif",
-    "weight": "",
-    "style": "italic"
-}, {
-    "aifont": "NYTCheltenham-BoldItalic",
-    "family": "nyt-cheltenham,georgia,'times new roman',times,serif",
-    "weight": "700",
-    "style": "italic"
-}, {
-    "aifont": "NYTCheltenham-ExtraBoldItal",
-    "family": "nyt-cheltenham,georgia,'times new roman',times,serif",
-    "weight": "bold",
-    "style": "italic"
-}, {
-    "aifont": "NYTCheltenham-ExtraBoldItalic",
-    "family": "nyt-cheltenham,georgia,'times new roman',times,serif",
-    "weight": "bold",
-    "style": "italic"
-}, {
-    "aifont": "NYTKarnakText-Regular",
-    "family": "nyt-karnak-display-130124,georgia,'times new roman',times,serif",
-    "weight": "400",
-    "style": ""
-}, {
-    "aifont": "NYTKarnakDisplay-Regular",
-    "family": "nyt-karnak-display-130124,georgia,'times new roman',times,serif",
-    "weight": "400",
-    "style": ""
-}, {
-    "aifont": "NYTStymieLight-Regular",
-    "family": "nyt-stymie,arial,helvetica,sans-serif",
-    "weight": "300",
-    "style": ""
-}, {
-    "aifont": "NYTStymieMedium-Regular",
-    "family": "nyt-stymie,arial,helvetica,sans-serif",
-    "weight": "500",
-    "style": ""
-}, {
-    "aifont": "StymieNYT-Light",
-    "family": "nyt-stymie,arial,helvetica,sans-serif",
-    "weight": "300",
-    "style": ""
-}, {
-    "aifont": "StymieNYT-LightPhoenetic",
-    "family": "nyt-stymie,arial,helvetica,sans-serif",
-    "weight": "300",
-    "style": ""
-}, {
-    "aifont": "StymieNYT-Lightitalic",
-    "family": "nyt-stymie,arial,helvetica,sans-serif",
-    "weight": "300",
-    "style": "italic"
-}, {
-    "aifont": "StymieNYT-Medium",
-    "family": "nyt-stymie,arial,helvetica,sans-serif",
-    "weight": "500",
-    "style": ""
-}, {
-    "aifont": "StymieNYT-MediumItalic",
-    "family": "nyt-stymie,arial,helvetica,sans-serif",
-    "weight": "500",
-    "style": "italic"
-}, {
-    "aifont": "StymieNYT-Bold",
-    "family": "nyt-stymie,arial,helvetica,sans-serif",
-    "weight": "700",
-    "style": ""
-}, {
-    "aifont": "StymieNYT-BoldItalic",
-    "family": "nyt-stymie,arial,helvetica,sans-serif",
-    "weight": "700",
-    "style": "italic"
-}, {
-    "aifont": "StymieNYT-ExtraBold",
-    "family": "nyt-stymie,arial,helvetica,sans-serif",
-    "weight": "700",
-    "style": ""
-}, {
-    "aifont": "StymieNYT-ExtraBoldText",
-    "family": "nyt-stymie,arial,helvetica,sans-serif",
-    "weight": "700",
-    "style": ""
-}, {
-    "aifont": "StymieNYT-ExtraBoldTextItal",
-    "family": "nyt-stymie,arial,helvetica,sans-serif",
-    "weight": "700",
-    "style": "italic"
-}, {
-    "aifont": "StymieNYTBlack-Regular",
-    "family": "nyt-stymie,arial,helvetica,sans-serif",
-    "weight": "700",
-    "style": ""
-}, {
-    "aifont": "StymieBT-ExtraBold",
-    "family": "nyt-stymie,arial,helvetica,sans-serif",
-    "weight": "700",
-    "style": ""
-}, {
-    "aifont": "Stymie-Thin",
-    "family": "nyt-stymie,arial,helvetica,sans-serif",
-    "weight": "300",
-    "style": ""
-}, {
-    "aifont": "Stymie-UltraLight",
-    "family": "nyt-stymie,arial,helvetica,sans-serif",
-    "weight": "300",
-    "style": ""
-}, {
-    "aifont": "NYTMagSans-Regular",
-    "family": "'nyt-mag-sans',arial,helvetica,sans-serif",
-    "weight": "500",
-    "style": ""
-}, {
-    "aifont": "NYTMagSans-Bold",
-    "family": "'nyt-mag-sans',arial,helvetica,sans-serif",
-    "weight": "700",
-    "style": ""
-},
+var fonts = [
+    {"aifont":"ArialMT","family":"arial,helvetica,sans-serif","weight":"","style":""},
+    {"aifont":"Arial-BoldMT","family":"arial,helvetica,sans-serif","weight":"bold","style":""},
+    {"aifont":"Arial-ItalicMT","family":"arial,helvetica,sans-serif","weight":"","style":"italic"},
+    {"aifont":"Arial-BoldItalicMT","family":"arial,helvetica,sans-serif","weight":"bold","style":"italic"},
+    {"aifont":"Georgia","family":"georgia,'times new roman',times,serif","weight":"","style":""},
+    {"aifont":"Georgia-Bold","family":"georgia,'times new roman',times,serif","weight":"bold","style":""},
+    {"aifont":"Georgia-Italic","family":"georgia,'times new roman',times,serif","weight":"","style":"italic"},
+    {"aifont":"Georgia-BoldItalic","family":"georgia,'times new roman',times,serif","weight":"bold","style":"italic"},
     {"aifont":"Forza-Black","family":"'Forza A', 'Forza B', 'Helvetica Neue', Arial, sans-serif","weight":"800","style":""},
     {"aifont":"Forza-BlackItalic","family":"'Forza A', 'Forza B', 'Helvetica Neue', Arial, sans-serif","weight":"800","style":"italic"},
     {"aifont":"Forza-Bold","family":"'Forza A', 'Forza B', 'Helvetica Neue', Arial, sans-serif","weight":"600","style":""},
